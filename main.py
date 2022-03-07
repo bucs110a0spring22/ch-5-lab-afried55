@@ -31,9 +31,94 @@ import time
 #########################################################
 #                   Your Code Goes Below                #
 #########################################################
-
-
-
+def drawSquare(myturtle=None, width=0, top_left_x=0, top_left_y=0):
+  '''This function draws a square
+  args: myturtle (turtle object), width (int), top_left (int or float), top_right(int or float) 
+  returns: None'''
+  myturtle.up()
+  myturtle.goto(top_left_x, top_left_y)
+  myturtle.down()
+  for i in range(4):
+    myturtle.right(90)
+    myturtle.forward(width)
+def drawLine(myturtle=None, x_start=0, y_start=0, x_end=0, y_end=0):
+  '''This function draws a line
+  args: myturtle (turtle object), x_start (int or float), y_start (int or float), x_end (int or float), y_end (int or float)
+  returns: None'''
+  myturtle.up()
+  myturtle.goto(x_start,y_start)
+  myturtle.down()
+  myturtle.goto(x_end,y_end)
+  myturtle.up()
+def drawCircle(myturtle=None, radius=0): #why is circle not round?
+  '''This function draws a circle
+  args: myturtle (turtle object), radius (int)'''
+  myturtle.up()
+  myturtle.goto(0,-1)
+  myturtle.down()
+  myturtle.circle(radius)
+  myturtle.up()
+def setUpDartboard(myscreen=None, myturtle=None):
+  '''This function sets up a dartboard using the above functions
+  args: myscreen (screen), myturtle (turtle object)
+  returns: None'''
+  myscreen.setworldcoordinates(-1,-1,1,1)
+  drawSquare(myturtle,2,1,1)
+  drawLine(myturtle,-1,0,1,0)
+  drawLine(myturtle,0,-1,0,1)
+  drawCircle(myturtle,1)
+def isInCircle(myturtle=None, circle_center_x=0, circle_center_y=0, radius=0):
+  '''This function determines if a dot is in the circle
+  args: myturtle (turtle object), circle_center_x (int or float), circle_center_y (int or float), radius (int)
+  returns: True or False'''
+  if myturtle.distance(circle_center_x,circle_center_y) <= radius:
+    return True
+  else:
+    return False
+def throwDart(myturtle=None): #how big should dot be?
+  '''This function simulates throwing a dart
+  args: myturtle (turtle object)
+  returns: None'''
+  myturtle.up()
+  x=random.uniform(-1,1)
+  y=random.uniform(-1,1)
+  myturtle.goto(x,y)
+  if isInCircle(myturtle,0,0,1)==True:
+    color = "pink"
+  else:
+    color = "purple"
+  myturtle.dot(5,color)
+def playDarts(myturtle=None): #am I allowed to put a print statement? should it return anything?
+  '''This function simulates a game of darts between two players
+  args: myturtle (turtle object)
+  returns: None'''
+  player_one_score = 0
+  player_two_score = 0
+  for i in range(10):
+    throwDart(myturtle)
+    if isInCircle(myturtle,0,0,1)==True:
+      player_one_score=player_one_score + 1
+    throwDart(myturtle)
+    if isInCircle(myturtle,0,0,1)==True:
+      player_two_score=player_two_score + 1
+  if player_one_score > player_two_score:
+    print("Player One Wins!")
+  elif player_one_score < player_two_score:
+    print("Player Two Wins!")
+  else:
+    print("Tie!")
+def montePi(myturtle=None, num_darts=0):
+  '''This function simulates an algorithm that returns the approximation of pi
+  args: myturtle (turtle object), num_darts (int)
+  returns: pi'''
+  inside_count = 0
+  for i in range(num_darts):
+    throwDart(myturtle)
+    if isInCircle(myturtle,0,0,1)==True:
+      inside_count = inside_count + 1
+  pi = 4*(inside_count/num_darts)
+  return pi
+  
 #########################################################
 #         Do not alter any code below here              #
 #       Your code must work with the main proivided     #
