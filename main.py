@@ -52,11 +52,12 @@ def drawLine(myturtle=None, x_start=0, y_start=0, x_end=0, y_end=0):
   myturtle.up()
 def drawCircle(myturtle=None, radius=0): #why is circle not round?
   '''This function draws a circle
-  args: myturtle (turtle object), radius (int)'''
+  args: myturtle (turtle object), radius (int)
+  returns: None'''
   myturtle.up()
   myturtle.goto(0,-1)
   myturtle.down()
-  myturtle.circle(radius)
+  myturtle.circle(radius,steps=100)
   myturtle.up()
 def setUpDartboard(myscreen=None, myturtle=None):
   '''This function sets up a dartboard using the above functions
@@ -87,7 +88,7 @@ def throwDart(myturtle=None): #how big should dot be?
     color = "pink"
   else:
     color = "purple"
-  myturtle.dot(5,color)
+  myturtle.dot(4,color)
 def playDarts(myturtle=None): #am I allowed to put a print statement? should it return anything?
   '''This function simulates a game of darts between two players
   args: myturtle (turtle object)
