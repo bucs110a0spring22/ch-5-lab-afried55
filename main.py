@@ -50,7 +50,7 @@ def drawLine(myturtle=None, x_start=0, y_start=0, x_end=0, y_end=0):
   myturtle.down()
   myturtle.goto(x_end,y_end)
   myturtle.up()
-def drawCircle(myturtle=None, radius=0): #why is circle not round?
+def drawCircle(myturtle=None, radius=0):
   '''This function draws a circle
   args: myturtle (turtle object), radius (int)
   returns: None'''
